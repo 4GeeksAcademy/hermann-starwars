@@ -13,13 +13,69 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			host: 'https://playground.4geeks.com/contact/agendas/hermannjames'
+
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getContacts: async () => {
+				const uri = host + '/contacts';
+				const options = {
+					method: 'GET'
+				}
+		 
+		 
+				const response = await fetch(uri, options);
+				if(!response.ok){
+				 console.log(response.status);
+				 return;
+				}
+				const data = await response.json();
+		 
+				setList(data);
 			},
+
+			addContacts: async () => {
+				const uri = host + '/contacts';
+				const dataToSend = {
+					"name": `${contact}`,
+					"phone": "",
+					"email": "",
+					"address": ""
+				  }
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(dataToSend)
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+			   }
+			   	const data = await response.json();
+			
+				getContacts();
+				setContact('');
+			
+			   },
+
+			removeContact: async (id) => {
+				const uri = host + `/contacts/${id}`;
+				const options = {
+					method: 'DELETE'
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				setList(list.filter(item => item.id !== id));
+				getContacts();
+			
+				},
 
 			getMessage: async () => {
 				try{

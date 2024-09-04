@@ -69,7 +69,7 @@ const ContactList = async () => {
     getContacts();
 
    }
-
+   // Metodo 'PUT'
    const editContacts = async (id) => {
     const uri = host + `/contacts/${id}`;
     const dataToSend = {
