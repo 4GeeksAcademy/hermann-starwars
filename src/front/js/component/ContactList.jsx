@@ -1,15 +1,21 @@
 import React , {useState, useContext} from 'react';
 import { Context } from '../store/appContext.js';
 import droidImage from "../../img/droid.png";
+import { useNavigate } from 'react-router-dom';
 
 const ContactList = () => {
     const {store} = useContext(Context);
+    const navigate = useNavigate();
+
+    const handleAddContact = () => {
+        navigate('/addContacts'); // Navega a la ruta addContacts cuando se haga clic en el botón
+    };
 
     return (
         <div className="container">
             <div className="encabezado">
                 <h1>CONTACTS</h1>
-                <button type="button" class="btn btn-success">Add Contact</button>
+                    <button type="button" className="btn btn-success" onClick={handleAddContact}>Add Contact</button>
             </div>
             <ul className='contact-list'>
                 {store.contacts.map((item) => (

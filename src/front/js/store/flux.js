@@ -2,7 +2,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			host: 'https://playground.4geeks.com/contact/agendas/hermannjames/contacts',
-			contacts: []
+			contacts: [],
+			name: 'Hermann Ramos',
+			phone: '123 456 789',
+			email: 'hermann@gmail.com',
+			address: 'Calle Hello World, 123'
 
 		},
 		actions: {
