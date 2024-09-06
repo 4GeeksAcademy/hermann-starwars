@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			getContacts: async () => {
-				const uri = `${getStore().host}`;
+				const uri = getStore().host;
 				const options = {
 					method: 'GET'
 				}
