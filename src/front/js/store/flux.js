@@ -14,17 +14,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			host: 'https://playground.4geeks.com/contact/agendas/hermannjames'
+		host: 'https://playground.4geeks.com/contact/agendas/hermannjames/contacts',
+		contacts: []
 
 		},
 		actions: {
 			getContacts: async () => {
-				const uri = host + '/contacts';
+				const uri = `${getStore().host}`;
 				const options = {
 					method: 'GET'
 				}
-		 
-		 
+				
 				const response = await fetch(uri, options);
 				if(!response.ok){
 				 console.log(response.status);
@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const data = await response.json();
 		 
-				setList(data);
+				setStore({contacts: data.contacts});
 			},
 
 			addContacts: async () => {

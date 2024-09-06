@@ -1,115 +1,31 @@
-import React , {useState, useEffect} from 'react';
+import React , {useState, useContext} from 'react';
+import { Context } from '../store/appContext.js';
 
 
-const ContactList = async () => {
-   const [contact, setContact] = useState('');
-   const [list, setList] = useState([]);
-   const host = 'https://playground.4geeks.com/contact/agendas/hermannjames';
+const ContactList = () => {
+    const {store, actions} = useContext(Context);
 
-
-   // Metodo 'GET'
-   const getContacts = async () => {
-       const uri = host + '/contacts';
-       const options = {
-           method: 'GET'
-       }
-
-
-       const response = await fetch(uri, options);
-       if(!response.ok){
-        console.log(response.status);
-        return;
-       }
-       const data = await response.json();
-
-       setList(data);
-   }
-
-
-   // Metodo 'POST'
-   const AddContacts = async () => {
-    const uri = host + '/contacts';
-    const dataToSend = {
-        "name": `${contact}`,
-        "phone": "",
-        "email": "",
-        "address": ""
-      }
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
-    }
-    const response = await fetch(uri, options);
-   if(!response.ok){
-    console.log(response.status);
-    return;
-   }
-   const data = await response.json();
-
-   getContacts();
-   setContact('');
-
-   }
-
-   // Metodo 'DELETE'
-   const removeContact = async (id) => {
-    const uri = host + `/contacts/${id}`;
-    const options = {
-        method: 'DELETE'
-    }
-    const response = await fetch(uri, options);
-    if(!response.ok){
-        console.log(response.status);
-        return;
-    }
-    setList(list.filter(item => item.id !== id));
-    getContacts();
-
-   }
-   // Metodo 'PUT'
-   const editContacts = async (id) => {
-    const uri = host + `/contacts/${id}`;
-    const dataToSend = {
-        "name": `${contact}`,
-        "phone": "",
-        "email": "",
-        "address": ""
-      }
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSend)
-    }
-
-    const response = await fetch(uri, options);
-    if(!response.ok){
-        console.log(response.status);
-        return;
-    }
-    const data = response.json();
-    getContacts();
-   }
-
-   useEffect(() => {
-    getContacts()
-   }, []);
-
-   return (
-    <div className="container">
-        <h1>Contact List</h1>
-        <ul>
-            {list.map((item) => (
-                <li key={item.id}>
-                    {item}
-                </li>
-            ))};
-        </ul>
-    </div>
-   );
+    return (
+        <div className="container">
+            <h1>Contact List</h1>
+            <ul>
+                {store.contacts.map((item) => (
+                    <li key={item.id}>
+                    <div className="contact-info">
+                      <h2>{item.name}</h2>
+                      <p><i className="fa fa-map-marker"></i> {item.address}</p>
+                      <p><i className="fa fa-phone"></i> {item.phone}</p>
+                      <p><i className="fa fa-envelope"></i> {item.email}</p>
+                    </div>
+                    <div className="contact-actions">
+                      <button className="edit-btn"><i className="fa fa-pencil"></i></button>
+                      <button className="delete-btn"><i className="fa fa-trash"></i></button>
+                    </div>
+                  </li>
+                ))};
+            </ul>
+        </div>
+    );
 }
 
+export default ContactList;
