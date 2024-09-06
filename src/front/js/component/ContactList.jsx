@@ -7,7 +7,10 @@ const ContactList = () => {
 
     return (
         <div className="container">
-            <h1>CONTACTS</h1>
+            <div className="encabezado">
+                <h1>CONTACTS</h1>
+                <button type="button" class="btn btn-success">Add Contact</button>
+            </div>
             <ul className='contact-list'>
                 {store.contacts.map((item) => (
                     <li key={item.id}>
