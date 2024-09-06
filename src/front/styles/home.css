@@ -5,3 +5,81 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1000px;
+}
+
+/* Estilos para el botón de agregar contacto */
+.add-contact {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-contact:hover {
+    background-color: #218838;
+}
+
+/* Lista de contactos */
+.contact-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* Tarjeta de contacto */
+.contact-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Cambiado a column para que el contenido sea vertical */
+    text-align: left; /* Alinear texto a la izquierda */
+    width: 100%; /* Asegúrate de que la tarjeta ocupe el ancho adecuado */
+}
+
+/* Imagen de perfil en la tarjeta */
+.profile-pic {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+/* Información del contacto */
+.contact-info h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.contact-info p {
+    font-size: 1rem;
+    color: #666;
+}
