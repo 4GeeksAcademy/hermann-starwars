@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			removeContact: async (id) => {
-				const uri = host + `/contacts/${id}`;
+				const uri = `${getStore().host}/${id}`;
 				const options = {
 					method: 'DELETE'
 				}
@@ -55,8 +55,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(response.status);
 					return;
 				}
-				setList(list.filter(item => item.id !== id));
-				getContacts();
+				
+				getActions().getContacts();
 			}
 		}
 	};

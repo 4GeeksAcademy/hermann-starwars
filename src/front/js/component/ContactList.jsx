@@ -4,12 +4,16 @@ import { useNavigate } from "react-router-dom";
 import droidImage from "../../img/droid.png";
 
 const ContactList = () => {
-    const {store} = useContext(Context);
+    const {store, actions} = useContext(Context);
     const navigate = useNavigate();
 
     const handleAddContact = (e) => {
         e.preventDefault();
         navigate('/addcontact');
+    }
+
+    const handleDeleteContact = (id) =>{
+        actions.removeContact(id);
     }
 
     return (
@@ -29,6 +33,7 @@ const ContactList = () => {
                                 <p><i className="fa fa-phone"></i> {item.phone}</p>
                                 <p><i className="fa fa-envelope"></i> {item.email}</p>
                             </div>
+                            <button type="button" className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}><i className="fas fa-trash-alt"></i></button>
                         </div>
                     </li>
                 ))}
