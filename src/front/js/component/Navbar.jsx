@@ -16,16 +16,16 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/planets">Planets</Link>
+              <Link className="nav-link" to="/contactlist">CONTACTS</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/systems">Systems</Link>
+              <Link className="nav-link" to="/systems">CHARACTERS</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/locations">Locations</Link>
+              <Link className="nav-link" to="/locations">PLANETS</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/cultures">Cultures</Link>
+              <Link className="nav-link" to="/cultures">VEHICULES</Link>
             </li>
           </ul>
         </div>
