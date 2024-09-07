@@ -12,8 +12,13 @@ const ContactList = () => {
         navigate('/addcontact');
     }
 
-    const handleDeleteContact = (id) =>{
+    const handleDeleteContact = (id) => {
         actions.removeContact(id);
+    }
+
+    const handleEditContact = (itemChanged) => {
+        actions.setChangedContact(itemChanged);
+        navigate('/editcontact');
     }
 
     return (
@@ -33,6 +38,7 @@ const ContactList = () => {
                                 <p><i className="fa fa-phone"></i> {item.phone}</p>
                                 <p><i className="fa fa-envelope"></i> {item.email}</p>
                             </div>
+                            <button type="reset" className="btn btn-secondary me-2" onClick={() => handleEditContact(item)}><i className="fas fa-edit"></i></button>
                             <button type="button" className="btn btn-danger" onClick={() => handleDeleteContact(item.id)}><i className="fas fa-trash-alt"></i></button>
                         </div>
                     </li>

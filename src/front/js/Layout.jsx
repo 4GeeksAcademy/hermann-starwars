@@ -7,6 +7,8 @@ import { BackendURL } from "./component/BackendURL.jsx";
 import { Navbar } from "./component/Navbar.jsx";
 import { Footer } from "./component/Footer.jsx";
 import AddContacts from './component/addContacts.jsx';
+import EditContact from "./component/editContact.jsx";
+import ContactList from "./component/ContactList.jsx";
 // Custom Pages / views
 import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/Demo.jsx";
@@ -30,7 +32,9 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<ContactList />} path="/contactlist" />
                         <Route element={<AddContacts />} path="/addcontact" />
+                        <Route element={<EditContact />} path="/editcontact" />
                         <Route element={<h1>Not found!</h1>} path="*"/>
                     </Routes>
                     <Footer />

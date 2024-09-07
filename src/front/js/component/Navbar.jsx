@@ -1,19 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import starWarsLogo from "../../img/starwars-logo.png";
+// import "./Navbar.css";  // Importa el archivo CSS personalizado
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">STAR WARS</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        {/* Logo */}
+        <Link className="navbar-brand" to="/">
+          <img src={starWarsLogo} alt="Star Wars Logo" width="150" height="75" className="d-inline-block align-text-top" />
+        </Link>
+
+        {/* Menú de navegación */}
+        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/planets">Planets</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/systems">Systems</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/locations">Locations</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cultures">Cultures</Link>
+            </li>
+          </ul>
+        </div>
+		<Link className="navbar-brand" to="/">
+			<button className="btn btn-warning ml-2" type="button">FAVORITES</button>
+        </Link>
+      </div>
+    </nav>
+  );
 };
