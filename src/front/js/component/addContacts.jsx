@@ -1,97 +1,67 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Context } from '../store/appContext'; // Asegúrate de que Context esté correctamente importado
+import React, {useContext, useState} from "react";
+import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext.js";
 
 const AddContacts = () => {
-    const { store, actions } = useContext(Context); // Si tienes acciones en tu contexto para manejar contactos
+    const {store, actions} = useContext(Context);
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
-    
-    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmitContact = (e) =>{
         e.preventDefault();
-        
-        // Crea el objeto con los datos del nuevo contacto
-        const newContact = {
-            name,
-            phone,
-            email,
-            address
-        };
-        
-        // Si tienes una acción en tu contexto para agregar el contacto, la llamas aquí
-        actions.addContact(newContact);
-
-        // Redirige a otra página después de guardar el contacto
+        const dataToSend = {
+            name: `${name}`,
+            phone: `${phone}`,
+            email: `${email}`,
+            address: `${address}`
+        }
+        actions.addContacts(dataToSend);
         navigate('/');
-    };
+    }
 
     return (
-        <div className="container bg-dark text-secondary w-50 rounded m-auto p-5">
-            <h1 className="text-light pt-4">Add Contact</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="inputName" className="form-label">
-                        Name <span className="text-warning">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputName"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                    />
+        <div className="container-add-contacts">
+            <h1>Add New Contact</h1>
+            <form onSubmit={handleSubmitContact}>
+            <div className="mb-3">
+                <label for='name' className="form-label">Name</label>
+                <div className="input-group">
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-user"></i></span>
+                    <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" id="name" required/>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="inputPhone" className="form-label">
-                        Phone <span className="text-warning">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputPhone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        required
-                    />
+            </div>
+            <div className="mb-3">
+                <label for='phone' className="form-label">Phone</label>
+                <div className="input-group">
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-phone"></i></span>
+                    <input type="text" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)}  placeholder="Phone" id="phone" required/>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="inputEmail" className="form-label">
-                        Email <span className="text-warning">*</span>
-                    </label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="inputEmail"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+            </div>
+            <div className="mb-3">
+                <label for='email' className="form-label">Email</label>
+                <div className="input-group">
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-envelope"></i></span>
+                    <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" id="email" required/>
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="inputAddress" className="form-label">
-                        Address <span className="text-warning">*</span>
-                    </label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="inputAddress"
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        required
-                    />
+            </div>
+            <div className="mb-3">
+                <label for='address' className="form-label">Address</label>
+                <div className="input-group">
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-map-marker-alt"></i></span>
+                    <input type="text" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" id="address" required/>
                 </div>
-                <div className="d-flex justify-content-end">
-                    <button type="submit" className="btn btn-warning me-3">Save</button>
-                    <button type="reset" className="btn btn-secondary" onClick={() => navigate('/')}>Cancel</button>
-                </div>
+            </div>
+            <div className="d-flex justify-content-end">
+                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
+                <button type="submit" className="btn btn-warning">Save</button>
+            </div>
             </form>
         </div>
     );
-};
+}
 
 export default AddContacts;

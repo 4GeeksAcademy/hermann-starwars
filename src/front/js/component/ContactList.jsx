@@ -1,23 +1,24 @@
-import React , {useState, useContext} from 'react';
-import { Context } from '../store/appContext.js';
+import React, { useContext } from "react";
+import { Context } from "../store/appContext.js";
+import { useNavigate } from "react-router-dom";
 import droidImage from "../../img/droid.png";
-import { useNavigate } from 'react-router-dom';
 
 const ContactList = () => {
     const {store} = useContext(Context);
     const navigate = useNavigate();
 
-    const handleAddContact = () => {
-        navigate('/addContacts'); // Navega a la ruta addContacts cuando se haga clic en el botón
-    };
+    const handleAddContact = (e) => {
+        e.preventDefault();
+        navigate('/addcontact');
+    }
 
     return (
         <div className="container">
             <div className="encabezado">
                 <h1>CONTACTS</h1>
-                    <button type="button" className="btn btn-success" onClick={handleAddContact}>Add Contact</button>
+                <button type="button" className="btn btn-success" onClick={handleAddContact}>Add Contact</button>
             </div>
-            <ul className='contact-list'>
+            <ul className="contact-list">
                 {store.contacts.map((item) => (
                     <li key={item.id}>
                         <div className="contact-card">
@@ -29,7 +30,7 @@ const ContactList = () => {
                                 <p><i className="fa fa-envelope"></i> {item.email}</p>
                             </div>
                         </div>
-                  </li>
+                    </li>
                 ))}
             </ul>
         </div>

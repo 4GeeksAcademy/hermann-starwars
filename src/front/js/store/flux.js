@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getContacts: async () => {
 				const uri = getStore().host;
 				const options = {
-					method: 'GET'
+					method: 'GET',
 				}
 
 				const response = await fetch(uri, options);
@@ -26,14 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ contacts: data.contacts });
 			},
 
-			addContacts: async () => {
-				const uri = host + '/contacts';
-				const dataToSend = {
-					"name": `${contact}`,
-					"phone": "",
-					"email": "",
-					"address": ""
-				}
+			addContacts: async (dataToSend) => {
+				const uri = getStore().host;
 				const options = {
 					method: 'POST',
 					headers: {
@@ -47,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
+				getActions().getContacts();
 
 			},
 
