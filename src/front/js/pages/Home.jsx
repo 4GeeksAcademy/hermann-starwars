@@ -9,7 +9,7 @@ export const Home = () => {
 	return (
 		<div className="contenedor">
 			<header className="background">
-				<img src={starWarsHeader} alt="Star wars Hero" />
+				<img src={starWarsHeader} />
 			</header>
 		</div>
 	);
