@@ -22,11 +22,11 @@ const EditContact = () => {
         };
         actions.editContacts(dataToSend, changed.id);
         actions.setChangedContact({});
-        navigate('/');
+        navigate('/contactlist');
     }
 
     return (
-        <div className="container">
+        <div className="container-edit-contacts">
             <h1>Edit Contact</h1>
             <form onSubmit={handleEditContact}>
             <div className="mb-3">
@@ -58,7 +58,7 @@ const EditContact = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-end">
-                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
+                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/contactlist')}>Cancel</button>
                 <button type="submit" className="btn btn-warning">Save</button>
             </div>
             </form>

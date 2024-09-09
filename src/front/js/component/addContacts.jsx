@@ -20,11 +20,11 @@ const AddContacts = () => {
             address: `${address}`
         }
         actions.addContacts(dataToSend);
-        navigate('/');
+        navigate('/contactlist');
     }
 
     return (
-        <div className="container-add-contacts">
+        <div className="container-add-contacts background-image">
             <h1>Add New Contact</h1>
             <form onSubmit={handleSubmitContact}>
             <div className="mb-3">
@@ -56,7 +56,7 @@ const AddContacts = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-end">
-                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
+                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/contactlist')}>Cancel</button>
                 <button type="submit" className="btn btn-warning">Save</button>
             </div>
             </form>

@@ -8,19 +8,19 @@ export const Navbar = () => {
       <div className="navbar-container">
         {/* Menú desplegable a la izquierda */}
         <div className="menu">
-          <button className="menu-button">☰</button>
+          <button className="menu-button"><i className="fa-solid fa-bars"></i></button>
           <ul className="menu-dropdown">
             <li>
               <Link className="nav-link" to="/contactlist">CONTACTS</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/systems">CHARACTERS</Link>
+              <Link className="nav-link" to="/characters">CHARACTERS</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/locations">PLANETS</Link>
+              <Link className="nav-link" to="/planets">PLANETS</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/cultures">VEHICLES</Link>
+              <Link className="nav-link" to="/vehicles">VEHICLES</Link>
             </li>
           </ul>
         </div>
