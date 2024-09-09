@@ -12,7 +12,7 @@ import ContactList from "./component/ContactList.jsx";
 import CharactersList from "./component/characterList.jsx";
 import PlanetsList from "./component/planetsList.jsx";
 import StarshipsList from "./component/starshipsList.jsx";
-import FilmsList from "./component/filmsList.jsx";
+import CharacterDetail from "./pages/CharacterDetails.jsx";
 // Custom Pages / views
 import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/Demo.jsx";
@@ -42,7 +42,7 @@ const Layout = () => {
                         <Route element={<CharactersList />} path="/characters" />
                         <Route element={<PlanetsList />} path="/planets" />
                         <Route element={<StarshipsList />} path="/starships" />
-                        <Route element={<FilmsList />} path="/films" />
+                        <Route element={<CharacterDetail />} path="/characters/:charId" />
                         <Route element={<h1>Not found!</h1>} path="*"/>
                     </Routes>
                     <Footer />

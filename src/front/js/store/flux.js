@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			planets: [],
 			starships: [],
-			films: []
+			characterDetails: {}
 
 		},
 		actions: {
@@ -91,11 +91,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// API STARWARS
 				// Metodo 'GET'
 			getCharacters: async () => {
-				if (localStorage.getItem('character')){
+				/* if (localStorage.getItem('character')){
 					alert('Ya existen los personajes');
 					setStore({characters: JSON.parse(localStorage.getItem('characters'))})
 					return;
-				}
+				} */
 				const uri = `${getStore().host_starwars}/people`;
 				const options = {
 					method: 'GET'
@@ -111,11 +111,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPlanets: async () => {
-				if (localStorage.getItem('planets')){
+				/* if (localStorage.getItem('planets')){
 					alert('Ya existen los planetas');
 					setStore({planets: JSON.parse(localStorage.getItem('planets'))})
 					return;
-				}
+				} */
 				const uri = `${getStore().host_starwars}/planets`;
 				const options = {
 					method: 'GET'
@@ -131,11 +131,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getStarships: async () => {
-				if (localStorage.getItem('starships')){
+				/* if (localStorage.getItem('starships')){
 					alert('Ya existen las naves espaciales');
 					setStore({starships: JSON.parse(localStorage.getItem('starships'))})
 					return;
-				}
+				} */
 				const uri = `${getStore().host_starwars}/starships`;
 				const options = {
 					method: 'GET'
@@ -149,24 +149,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({starships: data.results})
 				localStorage.setItem('starships', JSON.stringify(data.results))
 			},
-			getFilms: async () => {
-				if (localStorage.getItem('films')){
-					alert('Ya existen las peliculas');
-					setStore({films: JSON.parse(localStorage.getItem('films'))})
-					return;
-				}
-				const uri = `${getStore().host_starwars}/films`;
-				const options = {
-					method: 'GET'
-				}
-				const response = await fetch(uri, options);
+			getCharactersDetails: async (id) => {
+				const response= await fetch(`https://www.swapi.tech/api/people/${id}`);
 				if(!response.ok){
 					console.log(response.status);
 					return;
 				}
-				const data = await response.json();
-				setStore({films: data.result})
-				localStorage.setItem('films', JSON.stringify(data.result))
+				const data = response.json();
+				setStore({characterDetails: data.result.propierties});
 			}
 		}
 	};
