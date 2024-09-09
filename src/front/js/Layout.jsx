@@ -9,6 +9,10 @@ import { Footer } from "./component/Footer.jsx";
 import AddContacts from './component/addContacts.jsx';
 import EditContact from "./component/editContact.jsx";
 import ContactList from "./component/ContactList.jsx";
+import CharactersList from "./component/characterList.jsx";
+import PlanetsList from "./component/planetsList.jsx";
+import StarshipsList from "./component/starshipsList.jsx";
+import FilmsList from "./component/filmsList.jsx";
 // Custom Pages / views
 import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/Demo.jsx";
@@ -35,6 +39,10 @@ const Layout = () => {
                         <Route element={<ContactList />} path="/contactlist" />
                         <Route element={<AddContacts />} path="/addcontact" />
                         <Route element={<EditContact />} path="/editcontact" />
+                        <Route element={<CharactersList />} path="/characters" />
+                        <Route element={<PlanetsList />} path="/planets" />
+                        <Route element={<StarshipsList />} path="/starships" />
+                        <Route element={<FilmsList />} path="/films" />
                         <Route element={<h1>Not found!</h1>} path="*"/>
                     </Routes>
                     <Footer />

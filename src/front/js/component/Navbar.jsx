@@ -11,16 +11,19 @@ export const Navbar = () => {
           <button className="menu-button"><i className="fa-solid fa-bars"></i></button>
           <ul className="menu-dropdown">
             <li>
-              <Link className="nav-link" to="/contactlist">CONTACTS</Link>
-            </li>
-            <li>
               <Link className="nav-link" to="/characters">CHARACTERS</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/planets">PLANETS</Link>
+              <Link className="nav-link" to="/contactlist">CONTACTS</Link>
             </li>
             <li>
-              <Link className="nav-link" to="/vehicles">VEHICLES</Link>
+              <Link className="nav-link" to="/films">FILMS</Link>
+            </li>
+            <li>
+              <Link className="nav-link" to="/starships">STARSHIPS</Link>
+            </li>
+            <li>
+              <Link className="nav-link" to="/planets">PLANETS</Link>
             </li>
           </ul>
         </div>

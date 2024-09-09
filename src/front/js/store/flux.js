@@ -7,7 +7,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			name: 'Hermann Ramos',
 			phone: '123 456 789',
 			email: 'hermann@gmail.com',
-			address: 'Calle Hello World, 123'
+			address: 'Calle Hello World, 123',
+
+			host_starwars: 'https://www.swapi.tech/api',
+			host_starwars_imgs: 'https://starwars-visualguide.com/assets/img',
+			characters: [],
+			planets: [],
+			starships: [],
+			films: []
 
 		},
 		actions: {
@@ -79,6 +86,87 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				
 				getActions().getContacts();
+			},
+
+			// API STARWARS
+				// Metodo 'GET'
+			getCharacters: async () => {
+				if (localStorage.getItem('character')){
+					alert('Ya existen los personajes');
+					setStore({characters: JSON.parse(localStorage.getItem('characters'))})
+					return;
+				}
+				const uri = `${getStore().host_starwars}/people`;
+				const options = {
+					method: 'GET'
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				setStore({characters: data.results})
+				localStorage.setItem('characters', JSON.stringify(data.results))
+			},
+
+			getPlanets: async () => {
+				if (localStorage.getItem('planets')){
+					alert('Ya existen los planetas');
+					setStore({planets: JSON.parse(localStorage.getItem('planets'))})
+					return;
+				}
+				const uri = `${getStore().host_starwars}/planets`;
+				const options = {
+					method: 'GET'
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				setStore({planets: data.results})
+				localStorage.setItem('planets', JSON.stringify(data.results))
+			},
+
+			getStarships: async () => {
+				if (localStorage.getItem('starships')){
+					alert('Ya existen las naves espaciales');
+					setStore({starships: JSON.parse(localStorage.getItem('starships'))})
+					return;
+				}
+				const uri = `${getStore().host_starwars}/starships`;
+				const options = {
+					method: 'GET'
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				setStore({starships: data.results})
+				localStorage.setItem('starships', JSON.stringify(data.results))
+			},
+			getFilms: async () => {
+				if (localStorage.getItem('films')){
+					alert('Ya existen las peliculas');
+					setStore({films: JSON.parse(localStorage.getItem('films'))})
+					return;
+				}
+				const uri = `${getStore().host_starwars}/films`;
+				const options = {
+					method: 'GET'
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				setStore({films: data.result})
+				localStorage.setItem('films', JSON.stringify(data.result))
 			}
 		}
 	};
