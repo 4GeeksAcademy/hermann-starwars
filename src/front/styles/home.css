@@ -14,7 +14,9 @@ button, li {
   font-family: 'Exo 2', sans-serif;
   font-weight: 400;
 }
-
+body{
+    background-color: #0C0D15;
+}
 /*---NAVBAR---*/
 .navbar {
     top: 0;
@@ -90,14 +92,14 @@ button, li {
     justify-content: flex-end;
 }
 
-.btn-warning {
+.navbar .btn-warning {
     background-color: transparent;
     border: 2px solid #feda4a;
     color: #feda4a;
     padding: 10px 20px;
 }
 
-.btn-warning:hover {
+.navbar .btn-warning:hover {
     background-color: #feda4a;
     color: #000;
 }
@@ -129,7 +131,7 @@ button, li {
 .encabezado h1 {
     font-size: 2rem;
     color: #333;
-    color: #ffffff;
+    color: #feda4a;
 }
 
 .contact-list {
@@ -138,14 +140,14 @@ button, li {
 }
 
 .contact-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start; 
+    background-color: #2C2C2C;
+    border: 1px solid #ffffff; /* Borde amarillo Star Wars */
+    border-radius: 8px;
+    padding: 20px;
 }
 
 .profile-pic {
@@ -160,6 +162,7 @@ button, li {
     flex-direction: column;
     justify-content: center;
     flex: 1;
+    color: #ffffff;
 }
 
 .contact-info h2 {
@@ -170,13 +173,14 @@ button, li {
 .contact-info p {
     margin-bottom: 5px;
     font-size: 1rem;
-    color: #666;
+    color: #F0F0F0;
     display: flex;
     align-items: center;
 }
 
 .contact-info i {
     margin-right: 5px;
+    color: #F0F0F0;
 }
 
 /*----ADD-CONTACT----*/

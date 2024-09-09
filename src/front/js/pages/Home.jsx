@@ -7,7 +7,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="contenedor starwars-space">
+		<div className="contenedor">
 			<header className="background">
 				<img src={starWarsHeader} class="img-fluid"/>
 			</header>
