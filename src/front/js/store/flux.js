@@ -149,14 +149,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({starships: data.results})
 				localStorage.setItem('starships', JSON.stringify(data.results))
 			},
-			getCharactersDetails: async (id) => {
-				const response= await fetch(`https://www.swapi.tech/api/people/${id}`);
+			getCharactersDetails: async (uid) => {
+				const response = await fetch(`https://www.swapi.tech/api/people/${uid}`);
 				if(!response.ok){
 					console.log(response.status);
 					return;
 				}
-				const data = response.json();
-				setStore({characterDetails: data.result.propierties});
+				const data = await response.json();
+				console.log(data);
+				console.log(data.result.properties);
+				return data.result.properties;
+				
+				// setStore({characterDetails: data.result.properties});
 			}
 		}
 	};

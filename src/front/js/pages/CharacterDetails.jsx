@@ -1,27 +1,37 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext.js";
 
 const CharacterDetail = () => {
     const {store, actions} = useContext(Context);
     const params = useParams();
+    const[characterDetails, setCharacterDetails] = useState({});
 
-    useEffect(()=> {
-        actions.getCharactersDetails(params.uid);
-    }, []);
+    const handleFetch = async () => {
+        let data = await actions.getCharactersDetails(params.charId);
+        setCharacterDetails(data);
+    }
+
+    useEffect( () => {
+        handleFetch();
+    }, [params.charId]);
 
     return (
         <div className="container">
             <h1>DETAILS</h1>
-            {store.characterDetails === undefined ? 'leyendo' : 
+            {characterDetails.name === undefined ? 'leyendo' : 
             <>
-                <p>{params.uid}</p>
-                <p>{store.characterDetails.name}</p>
+                <div className="card">
+                    <img src={`${store.host_starwars_imgs}/characters/${characterDetails.charId}.jpg`} className="card-img-top" alt={characterDetails.name} />
+                    <div className="card-body">
+                        <h5 className="card-title">{characterDetails.name}</h5>
+                    </div>
+                </div>
             </>
+
         };
         </div>
-    );
-
+    )
 }
 
 export default CharacterDetail;
