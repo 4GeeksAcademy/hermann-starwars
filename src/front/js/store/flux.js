@@ -158,9 +158,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = await response.json();
 				console.log(data);
 				console.log(data.result.properties);
-				return data.result.properties;
+				// return data.result.properties;
 				
-				// setStore({characterDetails: data.result.properties});
+				setStore({characterDetails: data.result.properties});
+			},
+			clearCharacterDetail: () => {
+				setStore({characterDetails: {}});
 			}
 		}
 	};

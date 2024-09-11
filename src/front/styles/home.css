@@ -223,3 +223,51 @@ body{
     font-size: 2rem;
     color: #333;
 }
+
+/*----CARD-DETAILS----*/
+
+.starwars-card {
+    background-color: #000;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.starwars-image {
+    border-radius: 8px;
+    box-shadow: 0 0 7px rgba(255, 255, 255, 0.5);
+}
+
+.starwars-title {
+    font-size: 2.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 35px;
+}
+
+.starwars-info {
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.starwars-label {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.starwars-data {
+    font-size: 1.2rem;
+}
+
+.starwars-btn {
+    background-color: #feda4a;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
