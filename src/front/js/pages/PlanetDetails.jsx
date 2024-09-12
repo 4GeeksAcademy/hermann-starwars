@@ -8,15 +8,8 @@ const PlanetDetail = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const handleFetch = async () => {
-        let data = await actions.getPlanetsDetails(params.charId);
-        setCharacterDetails(data);
-    }
-
     useEffect( () => {
-        // handleFetch();
         actions.getPlanetsDetails(params.charId);
-        
     }, []);
 
     return (
@@ -25,57 +18,56 @@ const PlanetDetail = () => {
             {store.planetDetails.name === undefined ? 'leyendo' : 
             <>
                 <div className="card mb-3 starwars-card">
-                    <div className="row g-0">
-                        <div className="col-md-4">
+                    <div className="row g-0 align-items-center"> {/* Alineamos los items verticalmente al centro */}
+                        <div className="col-md-4 d-flex justify-content-center">
                             <img 
                                 src={`${store.host_starwars_imgs}/planets/${params.charId}.jpg`}
                                 className="img-fluid rounded starwars-image" 
                                 alt={store.planetDetails.name} 
                             />
                         </div>
-                        <div className="col-md-8 position-relative">
-                            <div className="card-body">
-                                <h1 className="card-title starwars-title">{store.planetDetails.name}</h1>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Mass</p>
-                                    <p className="starwars-data">{store.planetDetails.climate}</p>
+                        <div className="col-md-8">
+                            <div className="card-body d-flex flex-column justify-content-between">
+                                <div>
+                                    <h1 className="card-title starwars-title">{store.planetDetails.name}</h1>
+                                    <div className="starwars-info">
+                                        <p className="starwars-label">Climate</p>
+                                        <p className="starwars-data">{store.planetDetails.climate}</p>
+                                    </div>
+                                    <div className="starwars-info">
+                                        <p className="starwars-label">Gravity</p>
+                                        <p className="starwars-data">{store.planetDetails.gravity}</p>
+                                    </div>
+                                    <div className="starwars-info">
+                                        <p className="starwars-label">Orbital Period</p>
+                                        <p className="starwars-data">{store.planetDetails.orbital_period}</p>
+                                    </div>
+                                    <div className="starwars-info">
+                                        <p className="starwars-label">Surface Water</p>
+                                        <p className="starwars-data">{store.planetDetails.surface_water}</p>
+                                    </div>
+                                    <div className="starwars-info">
+                                        <p className="starwars-label">Population</p>
+                                        <p className="starwars-data">{store.planetDetails.population}</p>
+                                    </div>
+                                    <div className="starwars-info">
+                                        <p className="starwars-label">Diameter</p>
+                                        <p className="starwars-data">{store.planetDetails.diameter}</p>
+                                    </div>
                                 </div>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Height</p>
-                                    <p className="starwars-data">{store.planetDetails.gravity}</p>
-                                </div>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Hair Color</p>
-                                    <p className="starwars-data">{store.planetDetails.orbital_period}</p>
-                                </div>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Eye Color</p>
-                                    <p className="starwars-data">{store.planetDetails.population}</p>
-                                </div>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Skin Color</p>
-                                    <p className="starwars-data">{store.planetDetails.rotation_period}</p>
-                                </div>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Gender</p>
-                                    <p className="starwars-data">{store.planetDetails.surface_water}</p>
-                                </div>
-                                <div className="starwars-info">
-                                    <p className="starwars-label">Birth Year</p>
-                                    <p className="starwars-data">{store.planetDetails.terrain}</p>
+                                <div className="text-end">
+                                    <button 
+                                        type="button" 
+                                        className="btn starwars-btn me-3" 
+                                        onClick={() => navigate('/planets')}
+                                    >
+                                        Return
+                                    </button>
                                 </div>
                             </div>
-                            <button 
-                                type="button" 
-                                className="btn starwars-btn me-3 position-absolute bottom-0 end-0" 
-                                onClick={() => navigate('/planets')}
-                            >
-                                Return
-                            </button>
                         </div>
                     </div>
                 </div>
-
             </>
         };
         </div>

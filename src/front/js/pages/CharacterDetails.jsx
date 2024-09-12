@@ -8,13 +8,7 @@ const CharacterDetail = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const handleFetch = async () => {
-        let data = await actions.getCharactersDetails(params.charId);
-        setCharacterDetails(data);
-    }
-
     useEffect( () => {
-        // handleFetch();
         actions.getCharactersDetails(params.charId);
         return () => {
             actions.clearCharacterDetail();
