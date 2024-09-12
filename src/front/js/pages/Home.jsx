@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import darthvaderSlider from "../../img/darthvader-slider.jpg";
-import soldierSlider from "../../img/soldier-slider.jpg";
+import planetsSlider from "../../img/planets-slider.jpg";
 import starshipslider from "../../img/starships-slider.jpg";
 import { Link } from "react-router-dom";
 
@@ -30,7 +30,7 @@ export const Home = () => {
 								</div>
 						</div>
 						<div className="carousel-item" data-bs-interval="4000">
-							<img src={soldierSlider} className="d-block w-100" />
+							<img src={planetsSlider} className="d-block w-100" />
 								<div className="carousel-caption d-none d-md-block">
 									<h2>PLANETS</h2>
 									<p>Explore the Planets from across the Galaxy</p>
