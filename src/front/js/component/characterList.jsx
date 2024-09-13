@@ -24,7 +24,8 @@ const CharactersList = () => {
                             <img src={`${store.host_starwars_imgs}/characters/${item.uid}.jpg`} alt={item.name} onError={handleError} />
                             <div className="info">
                                 <h3>{item.name}</h3>
-                                <button type="reset" className="btn btn-warning me-2" onClick={() => {handleDetails(item.uid)}}>DETAILS</button>
+                                <button type="button" className="btn btn-warning me-2" onClick={() => {handleDetails(item.uid)}}>DETAILS</button>
+                                <button type="button" className="btn btn-secondary me-2" onClick={() => {actions.addFavorites({name: item.name, type: 'Character'})}}><i className="fas fa-heart"></i></button>
                             </div>
                         </div>
                     </div>

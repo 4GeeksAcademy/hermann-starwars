@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import starWarsLogo from "../../img/starwars-logo.png"; 
+import FavoritsList from "./favoritosList.jsx";
 
 export const Navbar = () => {
   return (
@@ -33,11 +34,7 @@ export const Navbar = () => {
         </div>
 
         {/* Botón "Favorites" a la derecha */}
-        <div className="favorites-container">
-          <Link to="/favorites">
-            <button className="btn btn-warning">FAVORITES</button>
-          </Link>
-        </div>
+        <FavoritsList />
       </div>
     </nav>
   );
