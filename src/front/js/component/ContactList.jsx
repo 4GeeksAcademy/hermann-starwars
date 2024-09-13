@@ -17,6 +17,11 @@ const ContactList = () => {
         navigate('/addcontact');
     }
 
+    const handleCreateAgenda = () => {
+        actions.createAgenda();
+        alert('Puedes empezar a Añadir Contactos');
+    }
+
     const handleDeleteContact = (id) => {
         actions.removeContact(id);
     }
@@ -30,7 +35,10 @@ const ContactList = () => {
         <div className="container">
             <div className="encabezado">
                 <h1>CONTACTS</h1>
-                <button type="button" className="btn btn-secondary" onClick={handleAddContact}>Add Contact</button>
+                <div className="botones">
+                    <button type="button" className="btn btn-warning me-3" onClick={handleCreateAgenda}>Create Agenda</button>
+                    <button type="button" className="btn btn-secondary" onClick={handleAddContact}>Add Contact</button>
+                </div>
             </div>
             <ul className="contact-list">
                 {store.contacts.map((item, index) => (

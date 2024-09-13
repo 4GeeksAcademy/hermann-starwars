@@ -36,6 +36,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ contacts: data.contacts });
 			},
+			createAgenda: async () => {
+				const uri = 'https://playground.4geeks.com/contact/agendas/hermannjames';
+				const dataToSend = {
+					slug: "hermannjames"
+				}
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(dataToSend)
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				getActions().getContacts();
+			},
 
 			addContacts: async (dataToSend) => {
 				const uri = getStore().host;
