@@ -6,22 +6,34 @@ const PlanetsList = () => {
     const {store, actions} = useContext(Context);
     const navigate = useNavigate();
 
+    const handleError = (event) => {
+        event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+    }
+    const handleDetails = (uid) => {
+        navigate(`/planets/${uid}`);
+    }
+    const isFavorite = (item) => {
+        return store.favorites.some(favorite => favorite.name === item.name);
+    };
+
     return (
-        <div className="container">
+        <div className="container cont-space">
             <div className="row">
                 <h1>PLANETS</h1>
                 <div className="row">
-                {store.planets.map((item) => (
-                    <div key={item.uid} className="col-md-3 my-3">
-                        <div className="card">
-                            <img src={`${store.host_starwars_imgs}/planets/${item.uid}.jpg`} className="card-img-top" alt={item.name}/>
-                            <div className="card-body bg-dark">
-                                <h2 className="card-title">{item.name}</h2>
+                    {store.planets.map((item) => (
+                        <div className="wrapper col-md-3 my-3" key={item.uid}>
+                            <div className="card planets-cards">
+                                <img src={`${store.host_starwars_imgs}/planets/${item.uid}.jpg`} alt={item.name} onError={handleError} />
+                                <div className="info">
+                                    <h3>{item.name}</h3>
+                                    <button type="button" className="btn btn-warning me-2" onClick={() => { handleDetails(item.uid) }}>DETAILS</button>
+                                    <button type="button" className="btn btn-secondary me-2" onClick={() => {actions.addFavorites({name: item.name, type: 'Planet'})}}><i className={`fas fa-heart ${isFavorite(item) ? 'is-favorite' : ''}`}></i></button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

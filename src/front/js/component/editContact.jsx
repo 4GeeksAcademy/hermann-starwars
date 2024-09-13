@@ -30,28 +30,28 @@ const EditContact = () => {
             <h1>Edit Contact</h1>
             <form onSubmit={handleEditContact}>
             <div className="mb-3">
-                <label for='name' className="form-label">Name</label>
+                <label htmlFor='name' className="form-label">Name</label>
                 <div className="input-group">
                     <span className="input-group-text" id="addon-wrapping"><i className="fas fa-user"></i></span>
                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" id="name" required/>
                 </div>
             </div>
             <div className="mb-3">
-                <label for='phone' className="form-label">Phone</label>
+                <label htmlFor='phone' className="form-label">Phone</label>
                 <div className="input-group">
                     <span className="input-group-text" id="addon-wrapping"><i className="fas fa-phone"></i></span>
                     <input type="text" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)}  placeholder="Phone" id="phone" required/>
                 </div>
             </div>
             <div className="mb-3">
-                <label for='email' className="form-label">Email</label>
+                <label htmlFor='email' className="form-label">Email</label>
                 <div className="input-group">
                     <span className="input-group-text" id="addon-wrapping"><i className="fas fa-envelope"></i></span>
                     <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" id="email" required/>
                 </div>
             </div>
             <div className="mb-3">
-                <label for='address' className="form-label">Address</label>
+                <label htmlFor='address' className="form-label">Address</label>
                 <div className="input-group">
                     <span className="input-group-text" id="addon-wrapping"><i className="fas fa-map-marker-alt"></i></span>
                     <input type="text" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" id="address" required/>
