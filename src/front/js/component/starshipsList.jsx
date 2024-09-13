@@ -18,18 +18,18 @@ const StarshipsList = () => {
             <div className="row">
                 <h1>STARSHIPS</h1>
                 <div className="row">
-                {store.starships.map((item) => (
-                    <div key={item.uid} className="col-md-3 my-3">
-                        <div className="card">
-                            <img src={`${store.host_starwars_imgs}/starships/${item.uid}.jpg`} className="card-img-top" alt={item.name} onError={handleError} style = {{aspectRatio:"3/2", width:"100%"}}/>
-                            <div className="card-body bg-dark">
-                                <h2 className="card-title">{item.name}</h2>
-                                <button type="reset" className="btn btn-warning me-2" onClick={() => {handleDetails(item.uid)}}>DETAILS</button>
+                    {store.starships.map((item) => (
+                        <div className="wrapper col-md-3 my-3" key={item.uid}>
+                            <div className="card starships-cards">
+                                <img src={`${store.host_starwars_imgs}/starships/${item.uid}.jpg`} alt={item.name} onError={handleError} />
+                                <div className="info">
+                                    <h3>{item.name}</h3>
+                                    <button type="reset" className="btn btn-warning me-2" onClick={() => { handleDetails(item.uid) }}>DETAILS</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

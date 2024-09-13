@@ -24,12 +24,9 @@ body{
     margin: 0;
     padding: 0;
 }
-
-.container {
-    margin-top: 130px;
+.cont-space{
+    margin-top: 160px;
 }
-
-
 /*---NAVBAR---*/
 .navbar {
     top: 0;
@@ -248,9 +245,21 @@ body{
     display: flex;
     justify-content: space-around;
 }
-.card {
+
+.characters-cards {
     width: 320px;
     height: 440px;
+}
+.planets-cards {
+    width: 320px;
+    height: 320px;
+}
+.starships-cards {
+    width: 360px;
+    height: 240px;
+}
+
+.card {
     padding: 2rem 1rem;
     background: #ffffff;
     position: relative;
@@ -326,4 +335,32 @@ body{
     padding: 0.5rem 1rem;
     background-color: #feda4a;
     transition: 0.4s ease-in-out;
+}
+
+/*----DETAILS----*/
+
+.info-data {
+    display: flex;
+    flex-wrap: wrap; /* Para asegurar que los elementos se ajusten en varias líneas si es necesario */
+    gap: 20px; /* Espacio entre los elementos */
+}
+
+.data-item {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
+    border: 1px solid #feda4a; /* Borde amarillo tipo Star Wars */
+    padding: 10px;
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    text-align: center;
+    min-width: 120px; /* Asegura que los elementos no sean demasiado pequeños */
+}
+
+.data-item h4 {
+    font-size: 1rem;
+    color: #feda4a;
+    margin-bottom: 5px;
+}
+
+.data-item p {
+    font-size: 1.1rem;
+    color: #ffffff;
 }

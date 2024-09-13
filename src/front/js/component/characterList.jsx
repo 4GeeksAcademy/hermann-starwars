@@ -14,13 +14,13 @@ const CharactersList = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container cont-space">
             <div className="row">
                 <h1>CHARACTERS</h1>
                 <div className="row">
                 {store.characters.map((item) => (
                     <div className="wrapper col-md-3 my-3" key={item.uid}>
-                        <div className="card">
+                        <div className="card characters-cards">
                             <img src={`${store.host_starwars_imgs}/characters/${item.uid}.jpg`} alt={item.name} onError={handleError} />
                             <div className="info">
                                 <h3>{item.name}</h3>
@@ -36,13 +36,3 @@ const CharactersList = () => {
 }
 
 export default CharactersList;
-
-                /*<div key={item.uid} className="col-md-3 my-3">
-                        <div className="card">
-                            <img src={`${store.host_starwars_imgs}/characters/${item.uid}.jpg`} className="card-img-top" alt={item.name} onError={handleError} style = {{aspectRatio:"3/4", width:"100%"}}/>
-                            <div className="card-body bg-dark">
-                                <h3 className="card-title">{item.name}</h3>
-                                <button type="reset" className="btn btn-warning me-2" onClick={() => {handleDetails(item.uid)}}>DETAILS</button>
-                            </div>
-                        </div>
-                    </div> */
