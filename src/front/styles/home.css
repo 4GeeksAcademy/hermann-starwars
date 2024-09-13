@@ -19,11 +19,15 @@ button, li {
 }
 
 /*---PAGE---*/
-body{
-    background-color: #0C0D15;
+body {
+    background-image: url("https://res.cloudinary.com/dbrzmir9f/image/upload/v1726236419/eubpxubwdckj0emigh39.jpg");
+    background-color: #000000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat-y;
     margin: 0;
     padding: 0;
-}
+  }
 .cont-space{
     margin-top: 160px;
 }
@@ -338,20 +342,30 @@ body{
 }
 
 /*----DETAILS----*/
+.card-details {
+    margin-top: 50px;
+}
+
+
+
+.card-details img {
+    border-radius: 15px;
+    border: 2px solid #ffffff;
+}
 
 .info-data {
     display: flex;
-    flex-wrap: wrap; /* Para asegurar que los elementos se ajusten en varias líneas si es necesario */
-    gap: 20px; /* Espacio entre los elementos */
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .data-item {
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo semitransparente */
-    border: 1px solid #feda4a; /* Borde amarillo tipo Star Wars */
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #feda4a;
     padding: 10px;
-    border-radius: 8px; /* Bordes ligeramente redondeados */
+    border-radius: 8px;
     text-align: center;
-    min-width: 120px; /* Asegura que los elementos no sean demasiado pequeños */
+    min-width: 120px;
 }
 
 .data-item h4 {

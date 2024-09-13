@@ -20,10 +20,10 @@ const CharacterDetail = () => {
             <h1>DETAILS</h1>
             {store.characterDetails.name === undefined ? 'Loading...' : 
             <>
-                <div className="container">
+                <div className="container card-details">
                     <div className="row align-items-center">
                         <div className="col-12 col-md-5">
-                            <img src={`${store.host_starwars_imgs}/characters/${params.charId}.jpg`} className="img-fluid rounded" />
+                            <img src={`${store.host_starwars_imgs}/characters/${params.charId}.jpg`} className="img-fluid" />
                         </div>
                         <div className="col-12 col-md-7">
                             <h1>{store.characterDetails.name}</h1>

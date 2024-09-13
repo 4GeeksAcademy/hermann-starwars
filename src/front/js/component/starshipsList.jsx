@@ -14,7 +14,7 @@ const StarshipsList = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container cont-space">
             <div className="row">
                 <h1>STARSHIPS</h1>
                 <div className="row">
