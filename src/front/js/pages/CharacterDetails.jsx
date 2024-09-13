@@ -8,6 +8,10 @@ const CharacterDetail = () => {
     const params = useParams();
     const navigate = useNavigate();
 
+    const handleError = (event) => {
+        event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+    }
+
     useEffect( () => {
         actions.getCharactersDetails(params.charId);
         return () => {
@@ -23,7 +27,7 @@ const CharacterDetail = () => {
                 <div className="container card-details">
                     <div className="row align-items-center">
                         <div className="col-12 col-md-5">
-                            <img src={`${store.host_starwars_imgs}/characters/${params.charId}.jpg`} className="img-fluid" />
+                            <img src={`${store.host_starwars_imgs}/characters/${params.charId}.jpg`} className="img-fluid" onError={handleError}/>
                         </div>
                         <div className="col-12 col-md-7">
                             <h1>{store.characterDetails.name}</h1>

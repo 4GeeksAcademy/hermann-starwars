@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			phone: '123 456 789',
 			email: 'hermann@gmail.com',
 			address: 'Calle Hello World, 123',
+			isAgendaCreated: false,
 
 			host_starwars: 'https://www.swapi.tech/api',
 			host_starwars_imgs: 'https://starwars-visualguide.com/assets/img',
@@ -55,8 +56,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				const data = await response.json();
 				getActions().getContacts();
+				setStore({isAgendaCreated: true});
 			},
-
+			checkAgendaStatus: async () => {
+				const uri = 'https://playground.4geeks.com/contact/agendas/hermannjames';
+				const response = await fetch(uri);
+				
+				if (response.ok) {
+					setStore({ isAgendaCreated: true });
+				} else {
+					setStore({ isAgendaCreated: false });
+				}
+			},			
 			addContacts: async (dataToSend) => {
 				const uri = getStore().host;
 				const options = {

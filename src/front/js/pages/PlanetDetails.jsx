@@ -8,6 +8,10 @@ const PlanetDetail = () => {
     const params = useParams();
     const navigate = useNavigate();
 
+    const handleError = (event) => {
+        event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+    }
+
     useEffect(() => {
         actions.getPlanetsDetails(params.charId);
     }, []);
@@ -20,7 +24,7 @@ const PlanetDetail = () => {
                 <div className="container card-details">
                     <div className="row align-items-center">
                         <div className="col-12 col-md-5">
-                            <img src={`${store.host_starwars_imgs}/planets/${params.charId}.jpg`} className="img-fluid" />
+                            <img src={`${store.host_starwars_imgs}/planets/${params.charId}.jpg`} className="img-fluid" onError={handleError}/>
                         </div>
                         <div className="col-12 col-md-7">
                             <h1>{store.planetDetails.name}</h1>

@@ -8,13 +8,11 @@ const StarshipDetail = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const handleFetch = async () => {
-        let data = await actions.getCharactersDetails(params.charId);
-        setCharacterDetails(data);
+    const handleError = (event) => {
+        event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
     }
 
     useEffect( () => {
-        // handleFetch();
         actions.getStarshipsDetails(params.charId);
         return () => {
             actions.clearCharacterDetail();
@@ -24,12 +22,12 @@ const StarshipDetail = () => {
     return (
         <div className="container cont-space">
             <h1>DETAILS</h1>
-            {store.starshipDetails.name === undefined ? 'leyendo' : 
+            {store.starshipDetails.name === undefined ? 'Loading...' : 
             <>
                 <div className="container card-details">
                     <div className="row align-items-center">
                         <div className="col-12 col-md-5">
-                            <img src={`${store.host_starwars_imgs}/starships/${params.charId}.jpg`} className="img-fluid" />
+                            <img src={`${store.host_starwars_imgs}/starships/${params.charId}.jpg`} className="img-fluid" onError={handleError}/>
                         </div>
                         <div className="col-12 col-md-7">
                             <h1>{store.starshipDetails.name}</h1>

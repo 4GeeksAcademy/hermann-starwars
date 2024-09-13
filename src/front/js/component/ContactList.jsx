@@ -32,12 +32,12 @@ const ContactList = () => {
     }
 
     return (
-        <div className="container">
+        <div className="container cont-space">
             <div className="encabezado">
                 <h1>CONTACTS</h1>
                 <div className="botones">
                     <button type="button" className="btn btn-warning me-3" onClick={handleCreateAgenda}>Create Agenda</button>
-                    <button type="button" className="btn btn-secondary" onClick={handleAddContact}>Add Contact</button>
+                    <button type="button" className="btn btn-secondary" onClick={handleAddContact} disabled={!store.isAgendaCreated}>Add Contact</button>
                 </div>
             </div>
             <ul className="contact-list">

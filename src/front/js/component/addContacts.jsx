@@ -24,7 +24,7 @@ const AddContacts = () => {
     }
 
     return (
-        <div className="container-add-contacts background-image">
+        <div className="container-add-contacts">
             <h1>Add New Contact</h1>
             <form onSubmit={handleSubmitContact}>
             <div className="mb-3">
@@ -42,7 +42,7 @@ const AddContacts = () => {
                 </div>
             </div>
             <div className="mb-3">
-                <label htmlhtmlFor='email' className="form-label">Email</label>
+                <label htmlFor='email' className="form-label">Email</label>
                 <div className="input-group">
                     <span className="input-group-text" id="addon-wrapping"><i className="fas fa-envelope"></i></span>
                     <input type="text" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" id="email" required/>
