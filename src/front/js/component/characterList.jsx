@@ -12,6 +12,9 @@ const CharactersList = () => {
     const handleError = (event) => {
         event.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
     }
+    const isFavorite = (item) => {
+        return store.favorites.some(favorite => favorite.name === item.name);
+    };
 
     return (
         <div className="container cont-space">
@@ -25,7 +28,7 @@ const CharactersList = () => {
                             <div className="info">
                                 <h3>{item.name}</h3>
                                 <button type="button" className="btn btn-warning me-2" onClick={() => {handleDetails(item.uid)}}>DETAILS</button>
-                                <button type="button" className="btn btn-secondary me-2" onClick={() => {actions.addFavorites({name: item.name, type: 'Character'})}}><i className="fas fa-heart"></i></button>
+                                <button type="button" className="btn btn-secondary me-2" onClick={() => {actions.addFavorites({name: item.name, type: 'Character'})}}><i className={`fas fa-heart ${isFavorite(item) ? 'is-favorite' : ''}`}></i></button>
                             </div>
                         </div>
                     </div>

@@ -119,6 +119,38 @@ body {
     color: #000;
 }
 
+.favorites-container .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.favorites-container .dropdown-menu li{
+    color: #ffffff;
+    font-size: 20px;
+}
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 15px;
+    font-size: 20px;
+}
+.is-favorite {
+    color: red;
+    transition: color 0.3s ease;
+}
+
+.delete-icon {
+    color: #feda4a;
+    font-size: 0.9rem;
+}
 
 
 /*----HOME----*/

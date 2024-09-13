@@ -183,10 +183,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({characterDetails: {}});
 			},
 			addFavorites: (newFavorite) => {
-				setStore({favorites: [...getStore().favorites, newFavorite]});
+				const duplicate = getStore().favorites.some(favorite => favorite.name === newFavorite.name)
+				if(!duplicate){
+					setStore({favorites: [...getStore().favorites, newFavorite]});
+				} else {
+					getActions().removeFavorites(newFavorite);
+				}
 			},
 			removeFavorites: (item) => {
-				const newFavorite = getStore().favorites.filter((element) => element !== item);
+				const newFavorite = getStore().favorites.filter((element) => element.name !== item.name);
 				setStore({favorites: newFavorite});
 			}
 		}
