@@ -8,13 +8,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			phone: '123 456 789',
 			email: 'hermann@gmail.com',
 			address: 'Calle Hello World, 123',
+			isAgendaCreated: false,
 
 			host_starwars: 'https://www.swapi.tech/api',
 			host_starwars_imgs: 'https://starwars-visualguide.com/assets/img',
 			characters: [],
 			planets: [],
 			starships: [],
-			characterDetails: {}
+			characterDetails: {},
+			planetDetails: {},
+			starshipDetails: {},
+			favorites: []
 
 		},
 		actions: {
@@ -33,7 +37,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({ contacts: data.contacts });
 			},
-
+			createAgenda: async () => {
+				const uri = 'https://playground.4geeks.com/contact/agendas/hermannjames';
+				const dataToSend = {
+					slug: "hermannjames"
+				}
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(dataToSend)
+				}
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				getActions().getContacts();
+				setStore({isAgendaCreated: true});
+			},
+			checkAgendaStatus: async () => {
+				const uri = 'https://playground.4geeks.com/contact/agendas/hermannjames';
+				const response = await fetch(uri);
+				
+				if (response.ok) {
+					setStore({ isAgendaCreated: true });
+				} else {
+					setStore({ isAgendaCreated: false });
+				}
+			},			
 			addContacts: async (dataToSend) => {
 				const uri = getStore().host;
 				const options = {
@@ -156,11 +190,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return;
 				}
 				const data = await response.json();
-				console.log(data);
-				console.log(data.result.properties);
-				return data.result.properties;
-				
-				// setStore({characterDetails: data.result.properties});
+				setStore({characterDetails: data.result.properties});
+			},
+			getPlanetsDetails: async (uid) => {
+				const response = await fetch(`https://www.swapi.tech/api/planets/${uid}`);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				setStore({planetDetails: data.result.properties});
+			},
+			getStarshipsDetails: async (uid) => {
+				const response = await fetch(`https://www.swapi.tech/api/starships/${uid}`);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = await response.json();
+				setStore({starshipDetails: data.result.properties});
+			},
+			clearCharacterDetail: () => {
+				setStore({characterDetails: {}});
+			},
+			addFavorites: (newFavorite) => {
+				const duplicate = getStore().favorites.some(favorite => favorite.name === newFavorite.name)
+				if(!duplicate){
+					setStore({favorites: [...getStore().favorites, newFavorite]});
+				} else {
+					getActions().removeFavorites(newFavorite);
+				}
+			},
+			removeFavorites: (item) => {
+				const newFavorite = getStore().favorites.filter((element) => element.name !== item.name);
+				setStore({favorites: newFavorite});
 			}
 		}
 	};

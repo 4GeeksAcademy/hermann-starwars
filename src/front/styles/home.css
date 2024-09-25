@@ -1,3 +1,5 @@
+/*----FONTS----*/
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600&display=swap');
 
@@ -15,8 +17,21 @@ button, li {
   font-family: 'Exo 2', sans-serif;
   font-weight: 400;
 }
-body{
-    background-color: #0C0D15;
+
+/*---PAGE---*/
+body {
+    background-image: url("https://res.cloudinary.com/dbrzmir9f/image/upload/v1726236419/eubpxubwdckj0emigh39.jpg");
+    background-color: #000000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat-y;
+    margin: 0;
+    padding: 0;
+  }
+
+.cont-space {
+    margin: 160px auto;
+    min-height: 100vh;
 }
 /*---NAVBAR---*/
 .navbar {
@@ -25,18 +40,19 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
+    z-index: 10;
+    padding: 20px 0;
 }
 
 .navbar-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 85%;
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 0 20px;
     align-items: center;
     border: 1px solid #ffffff;
-    background-color: rgba(0, 0, 0, 0.5);
-    margin-top: 15px;
 }
 
 .menu {
@@ -105,22 +121,61 @@ body{
     color: #000;
 }
 
-/*----HOME----*/
+.favorites-container .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 8px;
+    margin-top: 10px;
+}
 
-.background {
+.favorites-container .dropdown-menu li{
+    color: #ffffff;
+    font-size: 20px;
+}
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 15px;
+    font-size: 20px;
+}
+.is-favorite {
+    color: red;
+    transition: color 0.3s ease;
+}
+
+.delete-icon {
+    color: #feda4a;
+    font-size: 0.9rem;
+}
+
+
+/*----HOME----*/
+.carousel-inner, .carousel-item {
+    height: 100vh;
+  }
+
+.carousel-caption {
+    margin-bottom: 30px;
+}
+
+.carousel-item img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.background img{
-    width: 100%;
-    height: 100%;
-}
-.container{
-    margin-top: 10%;
-}
+    transition: transform 4s ease;
+    transform: scale(1.1);
+  }
+
+.carousel-item.active img {
+    transform: scale(1);
+  }
+
 /*----CONTACTS----*/
 
 .encabezado {
@@ -128,7 +183,6 @@ body{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    margin-top: 12%;
 }
 
 .encabezado h1 {
@@ -148,7 +202,7 @@ body{
     align-items: center;
     justify-content: flex-start; 
     background-color: #2C2C2C;
-    border: 1px solid #ffffff; /* Borde amarillo Star Wars */
+    border: 1px solid #ffffff;
     border-radius: 8px;
     padding: 20px;
 }
@@ -190,9 +244,8 @@ body{
 
 .container-add-contacts {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 160px auto;
     padding: 20px;
-    margin-top: 9%;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -209,9 +262,8 @@ body{
 
 .container-edit-contacts {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 160px auto;
     padding: 20px;
-    margin-top: 9%;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -222,4 +274,181 @@ body{
     margin-bottom: 20px;
     font-size: 2rem;
     color: #333;
+}
+
+/*----CHARACTER-LIST----*/
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.characters-cards {
+    width: 320px;
+    height: 440px;
+}
+.planets-cards {
+    width: 320px;
+    height: 320px;
+}
+.starships-cards {
+    width: 360px;
+    height: 240px;
+}
+
+.card {
+    padding: 2rem 1rem;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+    box-shadow: 0px 7px 10px rgba(0,0,0,0.5);
+    transition: 0.5s ease-in-out;
+    overflow: hidden;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.card:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.card:hover:before{
+    opacity: 1;
+}
+
+.card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.card .info{
+    position: relative;
+    z-index: 3;
+    color: #ffffff;
+    padding: 10px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.5s ease-in-out;
+    align-self: flex-end;
+    text-align: left;
+    width: 100%; 
+}
+
+.card:hover .info{
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.card .info h1{
+    margin: 0;
+}
+
+.card .info p{
+    letter-spacing: 1px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+.card .info button{
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: #feda4a;
+    transition: 0.4s ease-in-out;
+}
+
+/*----DETAILS----*/
+.card-details {
+    margin-top: 50px;
+}
+
+.card-details img {
+    border-radius: 15px;
+    border: 2px solid #ffffff;
+}
+
+.info-data {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.data-item {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #feda4a;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.data-item h4 {
+    font-size: 1rem;
+    color: #feda4a;
+    margin-bottom: 5px;
+}
+
+.data-item p {
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+ /*-----FOOTER----*/
+ footer {
+    background-color: #000;
+    color: #fff;
+    padding: 50px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+.footer-phrase {
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 1.2em;
+    color: #feda4a;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.footer-links {
+    text-align: right;
+}
+
+.footer-links a {
+    color: #fff;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    color: #feda4a;
+}
+
+.footer-logo img {
+    max-width: 200px;
 }
