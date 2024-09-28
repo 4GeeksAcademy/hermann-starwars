@@ -55,7 +55,7 @@ def posts():
         response_body['results'] = {}
         return response_body, 200
     
-@api.route('/posts/<int: id>', method=['GET', 'DELETE', 'PUT'])
+@api.route('/posts/<int:id>', methods=['GET', 'DELETE', 'PUT'])
 def post(id):
     response_body = {}
     if request.method == 'GET':
