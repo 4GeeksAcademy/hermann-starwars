@@ -43,12 +43,14 @@ def posts():
         return response_body, 200
     if request.method == 'POST':
         data = request.json
+        
         row = Posts(title=data.get('title'),
                     description=data.get('description'),
                     body=data.get('body'),
                     date=datetime.now(),
                     image_url=data.get('image_url'),
                     user_id=data.get('user_id'))
+        
         db.session.add(row)
         db.session.commit()
         response_body['message'] = "Creando una Publicacion (POST)"
@@ -75,9 +77,13 @@ def post(id):
 
         db.session.commit()
         response_body['message'] = f"Publiacion {id} modifiacada - (PUT)"
-        response_body['results'] = {}
+        response_body['results'] = post.serialize()
         return response_body, 200
     if request.method == 'DELETE':
+        db.session.execute(post)
+        db.session.commit()
+        rows = db.session.execute(db.select(Posts)).scalars()
+        results = [row.serialize() for row in rows]
         response_body['message'] = f"Publicacion {id} eliminada - (DELETE)"
-        response_body['results'] = {}
+        response_body['results'] = results
         return response_body, 200
