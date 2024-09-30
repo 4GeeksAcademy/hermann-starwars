@@ -4,22 +4,14 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-from api.models import db, Users, Posts
+from api.models import db, Users, Posts, Followers
 from datetime import datetime
-
 
 api = Blueprint('api', __name__)
 CORS(api) # Allow CORS requests to this API
 
 
-@api.route('/hello', methods=['GET'])
-def handle_hello():
-    response_body = {}
-    response_body["message"] = "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    return response_body, 200
-
-
-@api.route('/users')
+@api.route('/users', methods=['GET'])
 def users():
     response_body = {}
     rows = db.session.execute(db.select(Users)).scalars()
@@ -60,23 +52,25 @@ def posts():
 @api.route('/posts/<int:id>', methods=['GET', 'DELETE', 'PUT'])
 def post(id):
     response_body = {}
-    post = db.session.get(Posts, id)
+     # post = db.session.get(Posts, id)
+    post = db.session.execute(db.select(Posts).where(Posts.id == id)).scalar()
 
     if not post:
-        return jsonify({"message": "Publicacion no encontrada"}), 400
+        response_body['message'] = f"La publicación {id} no existe"
+        response_body['results'] = {}
+        return response_body, 400
 
     if request.method == 'GET':
-        rows = db.session.execute(db.select(Posts)).scalars()
         response_body['message'] = f"Datos de la publicacion: {id} - (GET)"
         response_body['results'] = post.serialize()
         return response_body, 200
     if request.method == 'PUT':
         data = request.json
 
-        post.title = data.get('title', post.title)
-        post.description = data.get('description', post.description)
-        post.body = data.get('body', post.body)
-        post.image_url = data.get('image_url', post.image_url)
+        post.title = data.get('title')
+        post.description = data.get('description')
+        post.body = data.get('body')
+        post.image_url = data.get('image_url')
         post.date = datetime.now()
 
         db.session.commit()
@@ -87,9 +81,30 @@ def post(id):
         db.session.delete(post)
         db.session.commit()
 
-        rows = db.session.execute(db.select(Posts)).scalars()
-        results = [row.serialize() for row in rows]
-
         response_body['message'] = f"Publicacion {id} eliminada - (DELETE)"
-        response_body['results'] = results
+        response_body['results'] = {}
         return response_body, 200
+    
+@api.route('/users/<int:id>/following', methods=['GET'])
+def follows(id):
+    response_body = {}
+    # Obtener usuarios a los que el usuario con el `id` dado está siguiendo
+    rows = db.session.execute(db.select(Followers).where(Followers.follower_id == id)).scalars()
+
+    results = [row.serialize_following() for row in rows]
+    response_body['message'] = f"Lista de usuarios que sigues"
+    response_body['results'] = results
+    return response_body, 200
+
+@api.route('/users/<int:id>/followers', methods=['GET'])
+def followers(id):
+    response_body = {}
+    
+    # Obtener usuarios que siguen al usuario con el `id` dado
+    rows = db.session.execute(db.select(Followers).where(Followers.following_id == id)).scalars()
+
+    results = [row.serialize_followers() for row in rows]
+    response_body['message'] = f"Lista de usuarios que te siguen"
+    response_body['results'] = results
+    return response_body, 200
+

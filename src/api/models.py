@@ -26,7 +26,9 @@ class Users(db.Model):
                 "is_admin": self.is_admin,
                 "first_name": self.first_name,
                 "last_name": self.last_name,
-                "posts": [row.serialize() for row in self.posts_to]}
+                "posts": [row.serialize() for row in self.posts_to],
+                "followers": [row.serialize_followers() for row in self.following_to],
+                "followings": [row.serialize_following() for row in self.follower_to]}
     
 # Model Table
 class Posts(db.Model):
@@ -51,6 +53,27 @@ class Posts(db.Model):
                 "image_url": self.image_url,
                 "user_id": self.user_id}
 
+class Followers(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    following_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    following_to = db.relationship('Users', foreign_keys=[following_id], backref=db.backref('following_to', lazy='select'))
+    follower_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    follower_to = db.relationship('Users', foreign_keys=[follower_id], backref=db.backref('follower_to', lazy='select'))
+
+    def __repr__(self):
+        return f'following: {self.following_id} - follower: {self.follower_id}'
+    
+    def serialize_following(self):
+        return {
+            "id": self.following_to.id,
+            "first_name": self.following_to.first_name
+        }
+    
+    def serialize_followers(self):
+        return {
+            "id": self.follower_to.id,
+            "first_name": self.follower_to.first_name
+        }
 
 class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,15 +94,6 @@ class Medias(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"), unique=True)
     post_to = db.relationship('Posts', foreign_keys=[post_id], backref=db.backref('medias_to', lazy='select'))
 
-class Followers(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    following_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    following_to = db.relationship('Users', foreign_keys=[following_id], backref=db.backref('following_to', lazy='select'))
-    follower_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    follower_to = db.relationship('Users', foreign_keys=[follower_id], backref=db.backref('follower_to', lazy='select'))
-
-    def __repr__(self):
-        return f'following: {self.following_id} - follower: {self.follower_id}'
 
 class CharacterFavorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
