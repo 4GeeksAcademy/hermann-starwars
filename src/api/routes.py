@@ -58,11 +58,22 @@ def posts():
 @api.route('/posts/<int:id>', methods=['GET', 'DELETE', 'PUT'])
 def post(id):
     response_body = {}
+    post = db.session.get(Posts, id)
     if request.method == 'GET':
+        rows = db.sessions.execute(db.select(Posts)).scalars()
         response_body['message'] = f"Datos de la publicacion: {id} - (GET)"
-        response_body['results'] = {}
+        response_body['results'] = post.serialize()
         return response_body, 200
     if request.method == 'PUT':
+        data = request.json
+
+        post.title = data.get('title', post.title)
+        post.description = data.get('description', post.description)
+        post.body = data.get('body', post.body)
+        post.image_url = data.get('image_url', post.image_url)
+        post.date = datetime.now()
+
+        db.session.commit()
         response_body['message'] = f"Publiacion {id} modifiacada - (PUT)"
         response_body['results'] = {}
         return response_body, 200
