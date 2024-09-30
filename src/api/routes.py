@@ -43,7 +43,7 @@ def posts():
         return response_body, 200
     if request.method == 'POST':
         data = request.json
-        
+
         row = Posts(title=data.get('title'),
                     description=data.get('description'),
                     body=data.get('body'),
@@ -61,8 +61,12 @@ def posts():
 def post(id):
     response_body = {}
     post = db.session.get(Posts, id)
+
+    if not post:
+        return jsonify({"message": "Publicacion no encontrada"}), 400
+
     if request.method == 'GET':
-        rows = db.sessions.execute(db.select(Posts)).scalars()
+        rows = db.session.execute(db.select(Posts)).scalars()
         response_body['message'] = f"Datos de la publicacion: {id} - (GET)"
         response_body['results'] = post.serialize()
         return response_body, 200
@@ -80,10 +84,12 @@ def post(id):
         response_body['results'] = post.serialize()
         return response_body, 200
     if request.method == 'DELETE':
-        db.session.execute(post)
+        db.session.delete(post)
         db.session.commit()
+
         rows = db.session.execute(db.select(Posts)).scalars()
         results = [row.serialize() for row in rows]
+
         response_body['message'] = f"Publicacion {id} eliminada - (DELETE)"
         response_body['results'] = results
         return response_body, 200
