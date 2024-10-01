@@ -4,8 +4,9 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-from api.models import db, Users, Posts, Followers
+from api.models import db, Users, Posts, Followers, Characters
 from datetime import datetime
+import requests
 
 api = Blueprint('api', __name__)
 CORS(api) # Allow CORS requests to this API
@@ -108,3 +109,40 @@ def followers(id):
     response_body['results'] = results
     return response_body, 200
 
+@api.route('/characters', methods=['GET'])
+def characters():
+    response_body = {}
+    url = 'https://www.swapi.tech/api/people'
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        rows = data['results']
+        characters_list = []
+
+        for row in rows:
+            char_url = row['url']
+            char_response = requests.get(char_url)
+
+            if response.status_code == 200:
+                char_data = char_response.json()
+                characters_details = char_data['result']['properties']
+
+                existing_character = Characters.query.filter_by(name=characters_details['name']).first()
+                if not existing_character:
+                    character = Characters(name = characters_details['name'],
+                                        height = characters_details.get('height'),
+                                        mass = characters_details.get('mass'),
+                                        hair_color = characters_details.get('hair_color'),
+                                        skin_color = characters_details.get('skin_color'),
+                                        eye_color = characters_details.get('eye_color'),
+                                        birth_year = characters_details.get('birth_year'),
+                                        gender = characters_details.get('gender'))
+                    
+                    db.session.add(character)
+                    db.session.commit()
+                characters_list.append(characters_details)
+
+            response_body['message'] = "Lista de personajes detallados"
+            response_body['results'] = characters_list
+        return response_body, 200
+    
