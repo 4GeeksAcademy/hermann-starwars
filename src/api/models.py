@@ -28,7 +28,9 @@ class Users(db.Model):
                 "last_name": self.last_name,
                 "posts": [row.serialize() for row in self.posts_to],
                 "followers": [row.serialize_followers() for row in self.following_to],
-                "followings": [row.serialize_following() for row in self.follower_to]}
+                "followings": [row.serialize_following() for row in self.follower_to],
+                "favorite_characters": [row.serialize() for row in self.favoriteChar_to],
+                "comments": [row.serialize() for row in self.commentsUser_to]}
     
 # Model Table
 class Posts(db.Model):
@@ -51,7 +53,8 @@ class Posts(db.Model):
                 "body": self.body,
                 "date": self.date,
                 "image_url": self.image_url,
-                "user_id": self.user_id}
+                "user_id": self.user_id,
+                "comments": [row.serialize() for row in self.commentsPost_to]}
 
 class Followers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -79,12 +82,17 @@ class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String, unique=False, nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("posts.id"))
-    post_to = db.relationship('Posts', foreign_keys=[post_id], backref=db.backref('comments_to', lazy='select'))
+    post_to = db.relationship('Posts', foreign_keys=[post_id], backref=db.backref('commentsPost_to', lazy='select'))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('comments_to', lazy='select'))
+    user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('commentsUser_to', lazy='select'))
 
     def __repr__(self):
         return f'comment: {self.body}'
+    
+    def serialize(self):
+        return {"body": self.body,
+                "post_id": self.post_id,
+                "user_id": self.user_id}
 
 class Medias(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -100,12 +108,29 @@ class CharacterFavorites(db.Model):
     character_id = db.Column(db.Integer, db.ForeignKey("characters.id"))
     character_to = db.relationship('Characters', foreign_keys=[character_id], backref=db.backref('favoriteChars_to', lazy='select'))
 
+    def __repr__(self):
+        return f"Favorite Characters: {self.character_id}"
+    
+    def serialize(self):
+        return {"user_id": self.user_id,
+                "character_name": self.character_to.name,
+                "character_id": self.character_id}
+
 class PlanetFavorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     user_to = db.relationship('Users', foreign_keys=[user_id], backref=db.backref('favoritePlan_to', lazy='select'))
     planet_id = db.Column(db.Integer, db.ForeignKey("planets.id"))
     planet_to = db.relationship('Planets', foreign_keys=[planet_id], backref=db.backref('favoritePlans_to', lazy='select'))
+
+    def __repr__(self):
+        return f"Favorite Planets: {self.planet_id}"
+    
+    def serialize(self):
+        return {"user_id": self.user_id,
+                "planet_name": self.planet_to.name,
+                "planet_id": self.planet_id}
+
 
 class Characters(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -142,3 +167,17 @@ class Planets(db.Model):
     population = db.Column(db.String, unique=False, nullable=True)
     climate = db.Column(db.String, unique=False, nullable=True)
     terrain = db.Column(db.String, unique=False, nullable=True)
+
+    def __repr__(self):
+        return f"Planet: {self.name}"
+    
+    def serialize(self):
+        return {"id": self.id,
+                "name": self.name,
+                "diameter": self.diameter,
+                "rotation_period": self.rotation_period,
+                "orbital_period": self.orbital_period,
+                "gravity": self.gravity,
+                "population": self.population,
+                "climate": self.climate,
+                "terrain": self.terrain} 
