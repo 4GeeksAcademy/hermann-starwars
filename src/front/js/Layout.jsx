@@ -12,13 +12,14 @@ import ContactList from "./component/ContactList.jsx";
 import CharactersList from "./component/characterList.jsx";
 import PlanetsList from "./component/planetsList.jsx";
 import StarshipsList from "./component/starshipsList.jsx";
-import CharacterDetail from "./pages/CharacterDetails.jsx";
-import PlanetDetail from "./pages/PlanetDetails.jsx";
-import StarshipDetail from "./pages/StarshipsDetails.jsx";
 // Custom Pages / views
 import { Home } from "./pages/Home.jsx";
 import { Demo } from "./pages/Demo.jsx";
 import { Single } from "./pages/Single.jsx";
+import CharacterDetail from "./pages/CharacterDetails.jsx";
+import PlanetDetail from "./pages/PlanetDetails.jsx";
+import StarshipDetail from "./pages/StarshipsDetails.jsx";
+import Login from "./pages/Login.jsx";
 
 
 //create your first component
@@ -47,6 +48,7 @@ const Layout = () => {
                         <Route element={<CharacterDetail />} path="/characters/:charId" />
                         <Route element={<PlanetDetail />} path="/planets/:charId" />
                         <Route element={<StarshipDetail />} path="/starships/:charId" />
+                        <Route element={<Login />} path="/login" />
                         <Route element={<h1>Not found!</h1>} path="*"/>
                     </Routes>
                     <Footer />
