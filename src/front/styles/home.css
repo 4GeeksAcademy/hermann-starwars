@@ -30,8 +30,8 @@ body {
   }
 
 .cont-space {
-    margin: 160px auto;
-    min-height: 100vh;
+    margin: 200px auto;
+    min-height: 55vh;
 }
 /*---NAVBAR---*/
 .navbar {
@@ -458,9 +458,8 @@ body {
 .login-container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     width: 100%;
-    min-height: 100vh;
 }
 
 .container-form {
@@ -521,7 +520,7 @@ input:valid ~ label {
     right:8px;
 }
 
-.olvidar{
+/* .olvidar{
     margin: -15px 0 15px;
     font-size: .9em;
     color: #ffffff;
@@ -542,24 +541,21 @@ input:valid ~ label {
 
 .olvidar label a:hover{
     text-decoration: underline;
-}
+} */
 
-button{
+.login-container button{
     width: 100%;
+    margin-top: 30px;
     height: 45px;
     border-radius: 40px;
-    background: #fff;
-    border: none;
     font-weight: bold;
-    font-size: 1rem;
-    transition: .4s;
 }
 
-button:hover {
+.login-container button:hover {
     opacity: .9;
 }
 
-.registrar{
+/* .registrar{
     font-size: .8rem;
     color: #ffffff;
     text-align: center;
@@ -575,4 +571,4 @@ button:hover {
 
 .registrar p a:hover {
     text-decoration: underline;
-}
+} */

@@ -1,35 +1,41 @@
 import React from "react";
+// import { Context } from "../store/appContext.js";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
+    // const {store, actions} = useContext(Context);
+    const navigate = useNavigate();
+
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+
     return (
         <div className="login-container cont-space">
             <div className="container-form">
                 <div className="formulario">
-                    <form action="">
-                        <h2>Log In</h2>
-                        <div className="input-contenedor">
+                    <h2>Log In</h2>
+                    <form onSubmit="">                        
+                        <div className="mb-3 input-contenedor">
                             <i className="fa-solid fa-envelope"></i>
-                            <input type="email" name="" id="" required/>
-                            <label htmlFor="">Email</label>
+                            <input type="email" id="email" required/>
+                            <label htmlFor="email" className="form-label">Email</label>
                         </div>
-                        <div className="input-contenedor">
+                        <div className="mb-3 input-contenedor">
                         <i className="fa-solid fa-lock"></i>
-                            <input type="password" name="" id="" required/>
-                            <label htmlFor="">Password</label>
+                            <input type="password" id="password" required/>
+                            <label htmlFor="password" className="form-label">Password</label>
                         </div>
-                        <div className="olvidar">
-                            <label htmlFor="">
-                                <input type="checkbox" name="" id="" />
+                        {/* <div className="olvidar">
+                            <label htmlFor="" className="form-label">
+                                <input type="checkbox" className="form-control" id="" />
                                 <a href="">Forgot my Password</a>
                             </label>
-                        </div>
+                        </div> */}
                     </form>
-
-                    <div>
-                        <button>Acceder</button>
-                        <div className="registrar">
-                            <p>No tengo cuenta <a href="">Crear Cuenta</a></p>
-                        </div>
+                    <div className="d-flex justify-content-end">
+                        <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
+                        <button type="submit" className="btn btn-warning">Save</button>
                     </div>
                 </div>
             </div>
