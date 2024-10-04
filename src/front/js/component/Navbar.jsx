@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import starWarsLogo from "../../img/starwars-logo.png"; 
 import FavoritsList from "./favoritosList.jsx";
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+  
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -34,7 +36,10 @@ export const Navbar = () => {
         </div>
 
         {/* Botón "Favorites" a la derecha */}
-        <FavoritsList />
+        <div className="d-flex justify-content-end">
+            <button type="button" className="btn btn-warning me-3" onClick={() => navigate('/login')}>Log In</button>
+            <FavoritsList />
+        </div>
       </div>
     </nav>
   );
