@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-// import { Context } from "../store/appContext.js";
+import React, {useState, useContext} from "react";
+import { Context } from "../store/appContext.js";
 import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-    // const {store, actions} = useContext(Context);
+    const {actions} = useContext(Context);
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -12,7 +12,9 @@ const Login = () => {
 
     const handleLogIn = (e) => {
         e.preventDefault();
-        navigate('/');
+        const dataToSend = {email, password}
+        actions.login(dataToSend);
+        navigate('/dashboard');
     }
 
     return (
@@ -31,11 +33,11 @@ const Login = () => {
                             <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                             <label htmlFor="password" className="form-label">Password</label>
                         </div>
+                        <div className="d-flex justify-content-end">
+                            <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
+                            <button type="submit" className="btn btn-warning">Access</button>
+                        </div>
                     </form>
-                    <div className="d-flex justify-content-end">
-                        <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
-                        <button type="submit" className="btn btn-warning">Save</button>
-                    </div>
                 </div>
             </div>
         </div>

@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import starWarsLogo from "../../img/starwars-logo.png"; 
 import FavoritsList from "./favoritosList.jsx";
+import { Context } from "../store/appContext.js";
 
 export const Navbar = () => {
+  const {store, actions} = useContext(Context);
   const navigate = useNavigate();
+
   
+  const handleLogIn = () => {
+    if(store.isLoged) {
+      actions.logout()
+      navigate('/')
+    } else {
+      navigate('/login')
+    }
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -37,7 +49,9 @@ export const Navbar = () => {
 
         {/* Botón "Favorites" a la derecha */}
         <div className="d-flex justify-content-end">
-            <button type="button" className="btn btn-warning me-3" onClick={() => navigate('/login')}>Log In</button>
+            <button type="button" className="btn btn-warning me-3" onClick={handleLogIn}>
+                {store.isLoged ? 'Log Out' : 'Log In'}
+              </button>
             <FavoritsList />
         </div>
       </div>

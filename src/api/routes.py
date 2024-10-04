@@ -26,8 +26,27 @@ def login():
         response_body['message']="Bad email or password"
         return response_body, 401
     access_token = create_access_token(identity={"email": user.email, "user_id": user.id, "is_admin": user.is_admin})
-    response_body['message']=f'Bienvenido {email}'
+    response_body['message']=f'Hola de nuevo {email}'
     response_body['access_token']=access_token
+    response_body['results'] = user.serialize()
+    return response_body, 200
+
+@api.route("/sign-up", methods=['POST'])
+def signup():
+    response_body = {}
+    data = request.json
+    row = Users(email = data.get("email"),
+                first_name = data.get("first_name"),
+                last_name = data.get("last_name"),
+                password = data.get("password"),
+                is_active = True,
+                is_admin = False)
+    
+    db.session.add(row)
+    db.session.commit()
+
+    response_body['message'] = f"Bienvenido a mi app"
+    response_body['results'] = {}
     return response_body, 200
 
 
