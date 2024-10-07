@@ -6,9 +6,9 @@ const Dashboard = () => {
     const {store, actions} = useContext(Context);
     const navigate = useNavigate();
 
-    // const handlePostsDetails = () => {
-    //     navigate(`/posts/${id}`)
-    // }
+    const handlePostsDetails = () => {
+        navigate(`/posts/${id}`);
+    }
     const handleErrorImage = (e) => {
         e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
     }
@@ -24,7 +24,7 @@ const Dashboard = () => {
                                     <img src={item.image_url} onError={handleErrorImage}/>
                                     <div className="info">
                                         <h3>{item.title}</h3>
-                                        <button type="button" className="btn btn-warning me-2" >DETAILS</button>
+                                        <button type="button" className="btn btn-warning me-2" onClick={handlePostsDetails(item.id)} >DETAILS</button>
                                 </div>
                                 </div>
                             </div>
