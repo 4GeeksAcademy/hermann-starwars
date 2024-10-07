@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characterDetails: {},
 			planetDetails: {},
 			starshipDetails: {},
-			favorites: []
+			favorites: [],
+			posts: []
 
 		},
 		actions: {
@@ -98,13 +99,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(uri, options);
 				if(!response.ok){
 					if(response.status == 403){
-						return
+						console.error("Acceso denegado: Token inválido");
+						return;
 					}
 					if(response.status == 404){
-						const data = await response.json()
+						console.error("Recurso no encontrado");
+						return;
 					}
+					if (!token) {
+						console.error("Token no encontrado");
+						return;
+					}					
 				}
 				const data = await response.json()
+				setStore({ posts: data });
+        		return data;
 			},
 			createAgenda: async () => {
 				const uri = 'https://playground.4geeks.com/contact/agendas/hermannjames';
