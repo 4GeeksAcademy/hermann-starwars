@@ -69,6 +69,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({isLoged: true, name: userData.email})
 				}
 			},
+			signup: async (dataToSend) => {
+				const uri = `${process.env.BACKEND_URL}/api/sign-up`;
+				const options = {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(dataToSend)
+				};
+				const response = await fetch(uri, options);
+				if(!response.ok){
+					console.log(response.status);
+					return;
+				}
+				const data = response.json();
+				setStore({isLoged: true})
+			},
 			accessProtected: async () => {
 				const uri = `${process.env.BACKEND_URL}/api/protected`;
 				const token = localStorage.getItem('token');

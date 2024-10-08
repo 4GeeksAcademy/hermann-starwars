@@ -1,22 +1,44 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { Context } from '../store/appContext';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+    const {store, actions} = useContext(Context);
+    const navigate = useNavigate()
+
+    const [email, setEmail] = useState('');
+    const [fisrtName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        const dataToSend = {
+            email: `${email}`,
+            first_name: `${fisrtName}`,
+            last_name: `${lastName}`,
+            password: `${password}`
+        }
+        actions.signup(dataToSend);
+        navigate('/dashboard');
+    }
+
     return (
         <div className="container-add-contacts">
             <h1>Add New User</h1>
-            <form onSubmit={handleSubmitContact}>
+            <form onSubmit={handleSignUp}>
             <div className="mb-3">
-                <label htmlFor='name' className="form-label">Name</label>
+                <label htmlFor='fisrtName' className="form-label">First Name</label>
                 <div className="input-group">
                     <span className="input-group-text" id="addon-wrapping"><i className="fas fa-user"></i></span>
-                    <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" id="name" required/>
+                    <input type="text" className="form-control" value={fisrtName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" id="fisrtName" required/>
                 </div>
             </div>
             <div className="mb-3">
-                <label htmlFor='phone' className="form-label">Phone</label>
+                <label htmlFor='lastName' className="form-label">Last Name</label>
                 <div className="input-group">
-                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-phone"></i></span>
-                    <input type="text" className="form-control" value={phone} onChange={(e) => setPhone(e.target.value)}  placeholder="Phone" id="phone" required/>
+                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-user"></i></span>
+                    <input type="text" className="form-control" value={lastName} onChange={(e) => setLastName(e.target.value)}  placeholder="Last Name" id="lastName" required/>
                 </div>
             </div>
             <div className="mb-3">
@@ -27,14 +49,14 @@ const SignUp = () => {
                 </div>
             </div>
             <div className="mb-3">
-                <label htmlFor='address' className="form-label">Address</label>
+                <label htmlFor='password' className="form-label">Password</label>
                 <div className="input-group">
-                    <span className="input-group-text" id="addon-wrapping"><i className="fas fa-map-marker-alt"></i></span>
-                    <input type="text" className="form-control" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" id="address" required/>
+                    <span className="input-group-text" id="addon-wrapping"><i className="fa-solid fa-lock"></i></span>
+                    <input type="text" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" id="password" required/>
                 </div>
             </div>
             <div className="d-flex justify-content-end">
-                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/contactlist')}>Cancel</button>
+                <button type="reset" className="btn btn-secondary me-3" onClick={() => navigate('/')}>Cancel</button>
                 <button type="submit" className="btn btn-warning">Save</button>
             </div>
             </form>

@@ -17,6 +17,9 @@ export const Navbar = () => {
       navigate('/login')
     }
   }
+  const handleSignUp = () => {
+    navigate('/sign-up')
+  }
 
   return (
     <nav className="navbar">
@@ -50,8 +53,13 @@ export const Navbar = () => {
         {/* Botón "Favorites" a la derecha */}
         <div className="d-flex justify-content-end">
             <button type="button" className="btn btn-warning me-3" onClick={handleLogIn}>
-                {store.isLoged ? 'Log Out' : 'Log In'}
-              </button>
+              {store.isLoged ? 'Log Out' : 'Log In'}
+            </button>
+          {!store.isLoged && (
+            <button type="button" className="btn btn-warning me-3" onClick={handleSignUp}>
+              Sign Up
+            </button>
+          )}
             <FavoritsList />
         </div>
       </div>

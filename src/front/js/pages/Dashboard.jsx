@@ -6,9 +6,9 @@ const Dashboard = () => {
     const {store, actions} = useContext(Context);
     const navigate = useNavigate();
 
-    const handlePostsDetails = () => {
-        navigate(`/posts/${id}`);
-    }
+    // const handlePostsDetails = () => {
+    //     navigate(`/posts/${id}`);
+    // }
     const handleErrorImage = (e) => {
         e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
     }
@@ -19,12 +19,12 @@ const Dashboard = () => {
                 <div className="row">
                     {store.posts.results && store.posts.results.length > 0 ? (
                         store.posts.results.map((item) => (
-                            <div className="wrapper col-md-3 my-3" key={item.id}>
-                                <div className="card dashboard-cards">
+                            <div className="wrapper col-md-3 my-3 dashboards-cards" key={item.id}>
+                                <div className="card">
                                     <img src={item.image_url} onError={handleErrorImage}/>
                                     <div className="info">
                                         <h3>{item.title}</h3>
-                                        <button type="button" className="btn btn-warning me-2" onClick={handlePostsDetails(item.id)} >DETAILS</button>
+                                        <button type="button" className="btn btn-warning me-2">DETAILS</button>
                                 </div>
                                 </div>
                             </div>
